@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+body,td,textarea {font-size:10.5px;padding:2px;font-family:Comic Sans MS, Arial;}
+a:link {color: blue;}
+a:visited {color: blue;}
+a:hover {color: blue;}
+a:active {color: red;}
+</style>
+<script>
+function p1()
+{
+   d=document.f1.ta1.value;
+
+   // **** code below provided to load XML
+   
+   cr=String.fromCharCode(10);
+   tb=String.fromCharCode(9);
+   lf=String.fromCharCode(13);
+   while (d.indexOf(cr)>-1)
+          d=d.replace(cr,"");
+   while (d.indexOf(lf)>-1)
+          d=d.replace(lf,"");
+   while (d.indexOf(tb)>-1)
+          d=d.replace(tb,"");
+   parser=new DOMParser();
+   xmlDoc=parser.parseFromString(d,"text/xml");
+   root=xmlDoc.documentElement;
+
+//*** answer starts here
+   
+   totalAwardsCount=0;
+   max=0;
+   max_year=""
+
+   os="<table border='1'>";
+   for (i=0;i<root.childNodes.length;i++) // *** outside row loop (20 years)
+       {
+        os=os+"<tr><td>"+root.childNodes[i].childNodes[0].childNodes[0].nodeValue+"</td><td>";           // *** start the row
+		                                                                                                 // *** year in the first cell 
+																										 // *** start second cell
+        
+		for (j=1;j<root.childNodes[i].childNodes.length;j++)     // *** roll out the award recipients
+            {
+              os=os+root.childNodes[i].childNodes[j].childNodes[0].nodeValue+"<br>"; // *** employee name
+		      totalAwardsCount++; // *** count the award
+            }
+		if ( (root.childNodes[i].childNodes.length)	> max) // *** is this biggest?
+		   {
+		    max=root.childNodes[i].childNodes.length;                        // *** remember the max
+			max_year=root.childNodes[i].childNodes[0].childNodes[0].nodeValue; // *** remember which year
+		   }	
+        os=os+"</td></tr>"  //*** end the row           
+       }
+os=os+"<table><br>Maximum Awards in year="+max_year+" ("+max.toString()+")"; // *** output max year and max
+os=os+"<br>Total Awards="+totalAwardsCount.toString();                       // *** output total number of awards
+p1_out.innerHTML=os;   
+
+}
+function p2()
+{
+ elnum=0;
+ for (i=1;i<7;i++)    //*** read data for each gauge 
+    {
+     idval="g"+i.toString();                       // *** construct id string
+	 top_val=document.f2.elements[elnum].value;    // *** get the top value from the textbox
+	 elnum++;                                           // *** increment the index 
+ 	 left_val=document.f2.elements[elnum].value;     // *** get the left value from the textbox
+	 elnum++;                                           // *** increment the index 
+	 width_and_height_val=document.f2.elements[elnum].value;     // *** get the width & height value from the textbox 
+	 elnum++;                                           // *** increment the index 
+     document.getElementById(idval).style.top=top_val.toString()+"px";                 // ***  set the top of this gauge 
+     document.getElementById(idval).style.left=left_val.toString()+"px";               // ***  set the left of this gauge 
+	 document.getElementById(idval).style.width=width_and_height_val.toString()+"px";  // ***  set the width & height of this gauge 
+    }
+}
+
+</script>
+</head>
+<body onload="p2()"><b>MIS 3371 Fall 2018 Exam 2 Parks<p>
+Last Name, First Name _____________________________________________________ Last 4 digits of  PSID _____________</b><br>
+<table border="1" cellspacing="0"  width="100%">
+<tr><td valign="top"><form name="f1">
+<textarea name="ta1" rows="23" cols="55"><companyAwards><year><yearValue>2000</yearValue><employeeName>Jacob Johnson</employeeName><employeeName>Madison Patel</employeeName><employeeName>Elizabeth Nguyen</employeeName><employeeName>Victoria Thompson</employeeName><employeeName>Anna Baker</employeeName><employeeName>Zachary Martinez</employeeName></year><year><yearValue>2001</yearValue><employeeName>Elizabeth Lopez</employeeName><employeeName>Brandon Walker</employeeName><employeeName>Benjamin Lee</employeeName></year><year><yearValue>2002</yearValue><employeeName>James Phillips</employeeName><employeeName>Sarah Campbell</employeeName><employeeName>Jonathan Wright</employeeName><employeeName>Matthew Harris</employeeName><employeeName>Natalie Thomas</employeeName></year><year><yearValue>2003</yearValue><employeeName>Alyssa Tu</employeeName><employeeName>Sarah King</employeeName><employeeName>Hannah Scott</employeeName><employeeName>John Moore</employeeName></year><year><yearValue>2004</yearValue><employeeName>Taylor Martin</employeeName><employeeName>Andrew Wright</employeeName><employeeName>Madison Wright</employeeName><employeeName>Brandon Rodriguez</employeeName></year><year><yearValue>2005</yearValue><employeeName>Alexander Scott</employeeName><employeeName>Ava Robinson</employeeName><employeeName>Tyler Lopez</employeeName></year><year><yearValue>2006</yearValue><employeeName>Madison King</employeeName><employeeName>James Adams</employeeName><employeeName>Isabella Gonzalez</employeeName></year><year><yearValue>2007</yearValue><employeeName>Victoria Baker</employeeName><employeeName>Victoria Lee</employeeName><employeeName>Ryan Tu</employeeName></year><year><yearValue>2008</yearValue><employeeName>Emma Turner</employeeName><employeeName>Anna Nelson</employeeName><employeeName>Andrew Thomas</employeeName><employeeName>Joshua Chin</employeeName><employeeName>Joshua Wright</employeeName></year><year><yearValue>2009</yearValue><employeeName>Victoria Baker</employeeName><employeeName>Zachary Baker</employeeName><employeeName>James Williams</employeeName></year><year><yearValue>2010</yearValue><employeeName>Abigail Turner</employeeName><employeeName>Alexander Martinez</employeeName><employeeName>Sophia Woo</employeeName><employeeName>Elizabeth Wright</employeeName><employeeName>Sophia Nelson</employeeName></year><year><yearValue>2011</yearValue><employeeName>Noah Wilson</employeeName><employeeName>Ava Anderson</employeeName><employeeName>Elizabeth Hernandez</employeeName><employeeName>Olivia White</employeeName></year><year><yearValue>2012</yearValue><employeeName>Matthew Thomas</employeeName><employeeName>Kayla Young</employeeName><employeeName>John Taylor</employeeName><employeeName>Noah Perez</employeeName></year><year><yearValue>2013</yearValue><employeeName>Lauren Taylor</employeeName><employeeName>Hannah Perez</employeeName><employeeName>Brianna Campbell</employeeName></year><year><yearValue>2014</yearValue><employeeName>Elizabeth Young</employeeName><employeeName>David White</employeeName><employeeName>Brianna Lopez</employeeName><employeeName>Anna Carter</employeeName><employeeName>Benjamin Taylor</employeeName></year><year><yearValue>2015</yearValue><employeeName>William Nelson</employeeName><employeeName>Noah Taylor</employeeName><employeeName>Christian Brown</employeeName><employeeName>Abigail Clark</employeeName></year><year><yearValue>2016</yearValue><employeeName>Benjamin Mitchell</employeeName><employeeName>Zachary Roberts</employeeName><employeeName>Joseph Phillips</employeeName><employeeName>Tyler Patel</employeeName><employeeName>Zachary Carter</employeeName></year><year><yearValue>2017</yearValue><employeeName>Brianna Harris</employeeName><employeeName>Isabella Allen</employeeName><employeeName>Jacob Davis</employeeName><employeeName>Michael Tran</employeeName></year><year><yearValue>2018</yearValue><employeeName>Hailey King</employeeName><employeeName>Abigail Davis</employeeName><employeeName>Sarah Mitchell</employeeName><employeeName>Christian Garcia</employeeName></year><year><yearValue>2019</yearValue><employeeName>John Johnson</employeeName><employeeName>Alyssa Rodriguez</employeeName><employeeName>Ethan Lee</employeeName></year></companyAwards></textarea>
+</form><center><input type="button" onclick="p1()" value="Execute p1" style="margin-top:4px;">
+</td>
+<td valign="top" style="padding:4px;"><b>1. (50 points)</b> The textarea shown to the left contains data on awards given to company employees each of the past <u>twenty years</u>. The DTD for the data is shown below.
+<pre>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE companyAwards [      
+&lt;!ELEMENT companyAwards(year+)&gt;
+&lt;!ELEMENT year (yearValue,employeeName+)&gt;   
+&lt;!ELEMENT yearValue (#PCDATA)&gt;              
+&lt;!ELEMENT employeeName (#PCDATA)&gt; 
+&lt;]&gt;
+</pre>
+
+When the "Execute p1" button is clicked:
+<ol type="a">
+<li> roll the XML data into a 20 row 2 column table. The first column contains the year value.
+The second column contains the employee names who received awards in that year (place each employee name on a line by itself)
+<li> after the table, report the year with the greatest number of employee awards and the number of awards in that year
+<li> also report the total number of awards shown for all years
+<li> place: the table; the year with the maximum awards and the number; and the total number of awards in the DIV with id="p1_out"
+</ol>
+<b>Notes:</b>
+<br>The number of years for the outer loop is: <b>root.childNodes.length</b>
+<br>The yearValue is: <b>root.childNodes[i].childNodes[0].childNodes[0].nodeValue</b>
+<br>The employee loop is: <b>for (j=1;j&lt;root.childNodes[i].childNodes.length;j++) </b>
+<br>The employeeName is: <b>root.childNodes[i].childNodes[j].childNodes[0].nodeValue</b>
+<p>
+Provide NO table heading row. Assume the code to load the XML data from the textarea into <b>root</b> object in javascript has already been written. (Don't write this code. just start using <b>root</b>). Show no HTML. Show only the javascript for <b>p1</b>.
+<div id="p1_out" style="border:solid black 1px;margin:5px;padding:2px;">This is the DIV with id='p1_out'</div>
+</td></tr></table>
+<br>
+<table border="1" cellspacing="0" width="100%">
+<tr>
+<td valign="top" border="1" style="width:410px;">
+<center>
+<div style="display:inline-block;position:relative;width:400px;height:200px;border:solid gray 1px;margin-top:6px;">
+<img id="g1" src="g1.png" style="position:absolute;width:70px;top:40px;left:5px;">
+<img id="g2" src="g2.png" style="position:absolute;width:70px;top:110px;left:5px;">
+<img id="g3" src="g3.png" style="position:absolute;width:70px;top:40px;left:320px;">
+<img id="g4" src="g4.png" style="position:absolute;width:70px;top:110px;left:320px;">
+<img id="g5" src="g5.png" style="position:absolute;width:120px;top:50px;left:75px;">
+<img id="g6" src="g6.png" style="position:absolute;width:120px;top:50px;left:200px;">
+</div>
+<br>
+<div style="display:inline-block;position:relative;width:160;border:none;">
+<form name="f2" style="margin:0px;padding:0px;">
+<table border="1" cellspacing="0">
+<tr><td>id="g1"</td><td><b>Fuel</td> <td>top <input type="text" size="3" value="40"></td><td>left <input type="text" size="3" value="5"></td><td>width & height <input type="text" size="3" value="70"></td></tr>
+<tr><td>id="g2"</td><td><b>Temp</td> <td>top <input type="text" size="3" value="110"></td><td>left <input type="text" size="3" value="5"></td><td>width & height <input type="text" size="3" value="70"></td></tr>
+<tr><td>id="g3"</td><td><b>Volts</td><td>top <input type="text" size="3" value="40"></td><td>left <input type="text" size="3" value="320"></td><td>width & height <input type="text" size="3" value="70"></td></tr>
+<tr><td>id="g4"</td><td><b>Oil</td>  <td>top <input type="text" size="3" value="110"></td><td>left <input type="text" size="3" value="320"></td><td>width & height <input type="text" size="3" value="70"></td></tr>
+<tr><td>id="g5"</td><td><b>Speed</td><td>top <input type="text" size="3" value="50"></td><td>left <input type="text" size="3" value="75"></td><td>width & height <input type="text" size="3" value="120"></td></tr>
+<tr><td>id="g6"</td><td><b>RPM</td>  <td>top <input type="text" size="3" value="50"></td><td>left <input type="text" size="3" value="200"></td><td>width & height <input type="text" size="3" value="120"></td></tr>
+</table></form>
+</div>
+<br>
+<input type="button" value="refresh" onclick="p2()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="reload original data" onclick="location.reload();"></center>
+</td>
+<td valign="top" style="padding:4px;"><b>2. (50 points)</b> The DIV block to the left contains the <u>square</u> images for six gauges. This DIV is 200 pixels tall and 400 pixels wide. When the "refresh" button is clicked, the function <b>p2</b> is executed. The table shown below and to the left contains:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. a form named "f2" 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. three textboxes for <u>each</u> of the six images' top, left
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and width properties.
+<br>When the "refresh" button is clicked, the function named <b>p2</b> sets the <b>top</b>, <b>left</b>
+and <b>width</b> style properties <u>for each of the six images</u>. The values in the textboxes are:
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>document.f2.elements[</b> <i>some_integer</i> <b>].value</b>
+<p>where <i>some_integer</i> ranges from 0 to 17. 
+<br>The form elements 0,1 and 2 (i.e., the textboxes) refer to top, left and width/height for the 1st image, elements 3,4,and 5 refer to top, left and width/height for the 2nd image, etc.). The six images have "id" values as shown in the first column of the table. Use:
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>document.getElementById(</b> <i>id_value</i> <b>).style.property</b> 
+<p>where <i>id_value</i> are the six strings: "g1", "g2", "g3", ... , "g6"
+<br>
+The <b>.property</b> values to be used are: <b>top</b>, <b>left</b>, and <b>width/height</b>. You will need to reset all 18 property values (six top, six left and six width/height). Remember to convert integer property values to strings and add the "px" suffix. 
+<br><n>Note</b>: setting <b>width</b> or setting <b>height</b> is sufficient. You need not set both.
+ <br>Show no HTML. Show only the javascript for <b>p2</b>.</td></tr>
+</table>
+</body>
+</html>        	                                             
